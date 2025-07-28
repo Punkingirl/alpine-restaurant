@@ -65,20 +65,34 @@ export function AuthProvider({ children }: AuthProviderProps) {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    // Check if Firebase is initialized
+    if (!auth || !db) {
+      console.warn('Firebase not initialized, skipping auth state listener');
+      setLoading(false);
+      return;
+    }
+
     const unsubscribe = onAuthStateChanged(
       auth,
       async (firebaseUser: FirebaseUser | null) => {
         if (firebaseUser) {
           try {
             // Get user profile from Firestore
-            const userDoc = await getDoc(doc(db, "users", firebaseUser.uid));
-            const profile = userDoc.data() as UserProfile;
+            if (db) {
+              const userDoc = await getDoc(doc(db, "users", firebaseUser.uid));
+              const profile = userDoc.data() as UserProfile;
 
-            setUser({
-              uid: firebaseUser.uid,
-              email: firebaseUser.email,
-              profile,
-            });
+              setUser({
+                uid: firebaseUser.uid,
+                email: firebaseUser.email,
+                profile,
+              });
+            } else {
+              setUser({
+                uid: firebaseUser.uid,
+                email: firebaseUser.email,
+              });
+            }
           } catch (error) {
             console.error("Error fetching user profile:", error);
             setUser({
@@ -97,6 +111,9 @@ export function AuthProvider({ children }: AuthProviderProps) {
   }, []);
 
   const login = async (email: string, password: string): Promise<void> => {
+    if (!auth) {
+      throw new Error('Firebase Auth not initialized');
+    }
     await signInWithEmailAndPassword(auth, email, password);
   };
 
@@ -105,6 +122,10 @@ export function AuthProvider({ children }: AuthProviderProps) {
     password: string,
     additionalData?: RestaurantSignupData
   ): Promise<void> => {
+    if (!auth || !db) {
+      throw new Error('Firebase not initialized');
+    }
+    
     const { user: firebaseUser } = await createUserWithEmailAndPassword(
       auth,
       email,
@@ -126,6 +147,9 @@ export function AuthProvider({ children }: AuthProviderProps) {
   };
 
   const logout = async (): Promise<void> => {
+    if (!auth) {
+      throw new Error('Firebase Auth not initialized');
+    }
     await signOut(auth);
   };
 
