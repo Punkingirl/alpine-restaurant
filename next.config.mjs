@@ -18,9 +18,7 @@ const nextConfig = {
       },
     ],
   },
-  experimental: {
-    serverComponentsExternalPackages: ['@firebase/app', '@firebase/firestore'],
-  },
+  serverExternalPackages: ['@firebase/app', '@firebase/firestore'],
 }
 
 export default nextConfig
