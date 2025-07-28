@@ -31,6 +31,10 @@ export interface Order {
 // Get all orders
 export async function getOrders(): Promise<Order[]> {
   try {
+    if (!db) {
+      console.warn('Firebase not initialized, returning empty array');
+      return [];
+    }
     const q = query(collection(db, 'orders'), orderBy('createdAt', 'desc'));
     const querySnapshot = await getDocs(q);
     return querySnapshot.docs.map(doc => ({
@@ -49,6 +53,10 @@ export async function getOrders(): Promise<Order[]> {
 // Get orders by status
 export async function getOrdersByStatus(status: Order['status']): Promise<Order[]> {
   try {
+    if (!db) {
+      console.warn('Firebase not initialized, returning empty array');
+      return [];
+    }
     const q = query(
       collection(db, 'orders'), 
       where('status', '==', status),
@@ -71,6 +79,10 @@ export async function getOrdersByStatus(status: Order['status']): Promise<Order[
 // Get order by ID
 export async function getOrderById(id: string): Promise<Order | null> {
   try {
+    if (!db) {
+      console.warn('Firebase not initialized, returning null');
+      return null;
+    }
     const docRef = doc(db, 'orders', id);
     const docSnap = await getDoc(docRef);
     
@@ -99,6 +111,10 @@ export async function getOrder(id: string): Promise<Order | null> {
 // Create new order
 export async function createOrder(order: Omit<Order, 'id' | 'createdAt' | 'updatedAt'>): Promise<string | null> {
   try {
+    if (!db) {
+      console.warn('Firebase not initialized, returning null');
+      return null;
+    }
     const orderData = {
       ...order,
       createdAt: new Date(),
@@ -115,6 +131,10 @@ export async function createOrder(order: Omit<Order, 'id' | 'createdAt' | 'updat
 // Update order status
 export async function updateOrderStatus(id: string, status: Order['status']): Promise<boolean> {
   try {
+    if (!db) {
+      console.warn('Firebase not initialized, returning false');
+      return false;
+    }
     const docRef = doc(db, 'orders', id);
     await updateDoc(docRef, {
       status,
@@ -130,6 +150,10 @@ export async function updateOrderStatus(id: string, status: Order['status']): Pr
 // Update order
 export async function updateOrder(id: string, updates: Partial<Order>): Promise<boolean> {
   try {
+    if (!db) {
+      console.warn('Firebase not initialized, returning false');
+      return false;
+    }
     const docRef = doc(db, 'orders', id);
     await updateDoc(docRef, {
       ...updates,
@@ -145,6 +169,10 @@ export async function updateOrder(id: string, updates: Partial<Order>): Promise<
 // Delete order
 export async function deleteOrder(id: string): Promise<boolean> {
   try {
+    if (!db) {
+      console.warn('Firebase not initialized, returning false');
+      return false;
+    }
     const docRef = doc(db, 'orders', id);
     await deleteDoc(docRef);
     return true;
@@ -157,6 +185,10 @@ export async function deleteOrder(id: string): Promise<boolean> {
 // Get recent orders (last 24 hours)
 export async function getRecentOrders(): Promise<Order[]> {
   try {
+    if (!db) {
+      console.warn('Firebase not initialized, returning empty array');
+      return [];
+    }
     const yesterday = new Date();
     yesterday.setDate(yesterday.getDate() - 1);
     
@@ -182,6 +214,10 @@ export async function getRecentOrders(): Promise<Order[]> {
 // Get orders by customer
 export async function getOrdersByCustomer(customerId: string): Promise<Order[]> {
   try {
+    if (!db) {
+      console.warn('Firebase not initialized, returning empty array');
+      return [];
+    }
     const q = query(
       collection(db, 'orders'),
       where('customerId', '==', customerId),

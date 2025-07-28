@@ -29,6 +29,10 @@ export interface MenuCategory {
 // Get all menu items
 export async function getMenuItems(): Promise<MenuItem[]> {
   try {
+    if (!db) {
+      console.warn('Firebase not initialized, returning empty array');
+      return [];
+    }
     const querySnapshot = await getDocs(collection(db, 'menuItems'));
     return querySnapshot.docs.map(doc => ({
       id: doc.id,
@@ -43,6 +47,10 @@ export async function getMenuItems(): Promise<MenuItem[]> {
 // Get menu items by category
 export async function getMenuItemsByCategory(category: string): Promise<MenuItem[]> {
   try {
+    if (!db) {
+      console.warn('Firebase not initialized, returning empty array');
+      return [];
+    }
     const q = query(collection(db, 'menuItems'), where('category', '==', category));
     const querySnapshot = await getDocs(q);
     return querySnapshot.docs.map(doc => ({
@@ -58,6 +66,10 @@ export async function getMenuItemsByCategory(category: string): Promise<MenuItem
 // Add new menu item
 export async function addMenuItem(item: Omit<MenuItem, 'id'>): Promise<string | null> {
   try {
+    if (!db) {
+      console.warn('Firebase not initialized, returning null');
+      return null;
+    }
     const docRef = await addDoc(collection(db, 'menuItems'), item);
     return docRef.id;
   } catch (error) {
@@ -74,6 +86,10 @@ export async function createMenuItem(item: Omit<MenuItem, 'id'>): Promise<string
 // Update menu item
 export async function updateMenuItem(id: string, updates: Partial<MenuItem>): Promise<boolean> {
   try {
+    if (!db) {
+      console.warn('Firebase not initialized, returning false');
+      return false;
+    }
     const docRef = doc(db, 'menuItems', id);
     await updateDoc(docRef, updates);
     return true;
@@ -86,6 +102,10 @@ export async function updateMenuItem(id: string, updates: Partial<MenuItem>): Pr
 // Delete menu item
 export async function deleteMenuItem(id: string): Promise<boolean> {
   try {
+    if (!db) {
+      console.warn('Firebase not initialized, returning false');
+      return false;
+    }
     const docRef = doc(db, 'menuItems', id);
     await deleteDoc(docRef);
     return true;
@@ -98,6 +118,10 @@ export async function deleteMenuItem(id: string): Promise<boolean> {
 // Get all categories
 export async function getMenuCategories(): Promise<MenuCategory[]> {
   try {
+    if (!db) {
+      console.warn('Firebase not initialized, returning empty array');
+      return [];
+    }
     const querySnapshot = await getDocs(collection(db, 'menuCategories'));
     return querySnapshot.docs.map(doc => ({
       id: doc.id,
@@ -112,6 +136,10 @@ export async function getMenuCategories(): Promise<MenuCategory[]> {
 // Add new category
 export async function addMenuCategory(category: Omit<MenuCategory, 'id'>): Promise<string | null> {
   try {
+    if (!db) {
+      console.warn('Firebase not initialized, returning null');
+      return null;
+    }
     const docRef = await addDoc(collection(db, 'menuCategories'), category);
     return docRef.id;
   } catch (error) {
