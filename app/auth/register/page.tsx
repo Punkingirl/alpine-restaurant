@@ -1,4 +1,6 @@
-import { RestaurantRegistrationForm } from "@/components/auth/restaurant-registration-form"
+'use client';
+
+import RestaurantRegistrationForm from "@/components/auth/restaurant-registration-form"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 
 export default function RegisterPage() {
