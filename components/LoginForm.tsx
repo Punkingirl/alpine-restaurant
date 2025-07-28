@@ -1,7 +1,8 @@
-// components/LoginForm.tsx (create this in each app)
+'use client';
+
 import { useState, FormEvent } from "react";
 import { useAuth } from "../hooks/useAuth";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 
 export default function LoginForm() {
   const [email, setEmail] = useState<string>("");
@@ -32,7 +33,7 @@ export default function LoginForm() {
   return (
     <div className="max-w-md mx-auto mt-8 p-6 bg-white rounded-lg shadow-md">
       <h2 className="text-2xl font-bold text-center mb-6 text-green-600">
-        Alpine Delivery Login
+        Alpine Restaurant Login
       </h2>
 
       <form onSubmit={handleLogin} className="space-y-4">
@@ -86,17 +87,6 @@ export default function LoginForm() {
           {loading ? "Signing in..." : "Sign In"}
         </button>
       </form>
-    </div>
-  );
-}
-
-// pages/login.tsx (create this page to test login)
-import LoginForm from "../components/LoginForm";
-
-export default function LoginPage() {
-  return (
-    <div className="min-h-screen bg-gray-50 py-8">
-      <LoginForm />
     </div>
   );
 }
