@@ -261,4 +261,7 @@ export default function OrderFilters({
       )}
     </div>
   );
-} 
+}
+
+// Named export for compatibility
+export { OrderFilters }; 

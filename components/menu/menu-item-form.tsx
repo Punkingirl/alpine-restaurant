@@ -295,4 +295,7 @@ export default function MenuItemForm({ item, categories, onSubmit, onCancel }: M
       </CardContent>
     </Card>
   );
-} 
+}
+
+// Named export for compatibility
+export { MenuItemForm }; 

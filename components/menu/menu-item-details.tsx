@@ -196,4 +196,7 @@ export default function MenuItemDetails({ itemId, onEdit, onDelete }: MenuItemDe
       </Card>
     </div>
   );
-} 
+}
+
+// Named export for compatibility
+export { MenuItemDetails }; 

@@ -138,4 +138,7 @@ export default function DeliveryInfo({
       </CardContent>
     </Card>
   );
-} 
+}
+
+// Named export for compatibility
+export { DeliveryInfo }; 

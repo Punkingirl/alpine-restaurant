@@ -66,6 +66,11 @@ export async function addMenuItem(item: Omit<MenuItem, 'id'>): Promise<string | 
   }
 }
 
+// Create menu item (alias for addMenuItem)
+export async function createMenuItem(item: Omit<MenuItem, 'id'>): Promise<string | null> {
+  return addMenuItem(item);
+}
+
 // Update menu item
 export async function updateMenuItem(id: string, updates: Partial<MenuItem>): Promise<boolean> {
   try {

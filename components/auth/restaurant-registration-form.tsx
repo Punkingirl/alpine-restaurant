@@ -213,4 +213,7 @@ export default function RestaurantRegistrationForm() {
       </CardContent>
     </Card>
   );
-} 
+}
+
+// Named export for compatibility
+export { RestaurantRegistrationForm }; 

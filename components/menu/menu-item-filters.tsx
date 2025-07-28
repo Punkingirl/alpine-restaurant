@@ -165,4 +165,7 @@ export default function MenuItemFilters({
       )}
     </div>
   );
-} 
+}
+
+// Named export for compatibility
+export { MenuItemFilters }; 

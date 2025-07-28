@@ -258,4 +258,7 @@ export default function OrdersAnalytics({ timeRange = 'week' }: OrdersAnalyticsP
       </Card>
     </div>
   );
-} 
+}
+
+// Named export for compatibility
+export { OrdersAnalytics }; 

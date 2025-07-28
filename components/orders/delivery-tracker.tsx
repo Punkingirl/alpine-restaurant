@@ -237,4 +237,7 @@ export default function DeliveryTracker({
       </CardContent>
     </Card>
   );
-} 
+}
+
+// Named export for compatibility
+export { DeliveryTracker }; 

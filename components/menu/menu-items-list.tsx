@@ -258,4 +258,7 @@ export default function MenuItemsList({
       )}
     </div>
   );
-} 
+}
+
+// Named export for compatibility
+export { MenuItemsList }; 

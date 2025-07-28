@@ -91,6 +91,11 @@ export async function getOrderById(id: string): Promise<Order | null> {
   }
 }
 
+// Get order (alias for getOrderById)
+export async function getOrder(id: string): Promise<Order | null> {
+  return getOrderById(id);
+}
+
 // Create new order
 export async function createOrder(order: Omit<Order, 'id' | 'createdAt' | 'updatedAt'>): Promise<string | null> {
   try {

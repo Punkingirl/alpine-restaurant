@@ -57,4 +57,7 @@ export default function AddMenuItemButton({ categories, onItemAdded }: AddMenuIt
       </DialogContent>
     </Dialog>
   );
-} 
+}
+
+// Named export for compatibility
+export { AddMenuItemButton }; 

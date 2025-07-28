@@ -138,4 +138,7 @@ export default function AddCategoryButton({ onCategoryAdded }: AddCategoryButton
       </DialogContent>
     </Dialog>
   );
-} 
+}
+
+// Named export for compatibility
+export { AddCategoryButton }; 

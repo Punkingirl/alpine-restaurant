@@ -192,4 +192,7 @@ export default function CategoriesList({
       )}
     </div>
   );
-} 
+}
+
+// Named export for compatibility
+export { CategoriesList }; 

@@ -186,4 +186,7 @@ export default function KitchenTimer({
       </CardContent>
     </Card>
   );
-} 
+}
+
+// Named export for compatibility
+export { KitchenTimer }; 

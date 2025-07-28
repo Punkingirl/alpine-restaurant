@@ -139,4 +139,7 @@ export default function CustomerInfo({
       </CardContent>
     </Card>
   );
-} 
+}
+
+// Named export for compatibility
+export { CustomerInfo }; 
